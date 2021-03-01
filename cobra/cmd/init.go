@@ -18,7 +18,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/spf13/cobra"
+	"github.com/yuansudong/cobra"
 	"github.com/spf13/viper"
 )
 
@@ -28,16 +28,10 @@ var (
 	initCmd = &cobra.Command{
 		Use:     "init [name]",
 		Aliases: []string{"initialize", "initialise", "create"},
-		Short:   "Initialize a Cobra Application",
-		Long: `Initialize (cobra init) will create a new application, with a license
-and the appropriate structure for a Cobra-based CLI application.
-
-  * If a name is provided, a directory with that name will be created in the current directory;
-  * If no name is provided, the current directory will be assumed;
-`,
+		Short:   "初始化一个Cobra应用",
+		Long: `初始化(cobra init)将创建一个应用程序,如果提供了一个名字,一个目录将被创建在当前目录下.如果没有提供一个名字,这个目录就是当前目录;`,
 
 		Run: func(_ *cobra.Command, args []string) {
-
 			projectPath, err := initializeProject(args)
 			cobra.CheckErr(err)
 			fmt.Printf("Your Cobra application is ready at\n%s\n", projectPath)

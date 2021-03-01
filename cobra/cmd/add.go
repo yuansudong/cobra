@@ -18,7 +18,7 @@ import (
 	"os"
 	"unicode"
 
-	"github.com/spf13/cobra"
+	"github.com/yuansudong/cobra"
 )
 
 var (
@@ -28,24 +28,15 @@ var (
 	addCmd = &cobra.Command{
 		Use:     "add [command name]",
 		Aliases: []string{"command"},
-		Short:   "Add a command to a Cobra Application",
-		Long: `Add (cobra add) will create a new command, with a license and
-the appropriate structure for a Cobra-based CLI application,
-and register it to its parent (default rootCmd).
-
-If you want your command to be public, pass in the command name
-with an initial uppercase letter.
-
-Example: cobra add server -> resulting in a new cmd/server.go`,
+		Short:   "增加一个命令到Cobra应用.",
+		Long: `增加(cobra add)将创建一个新的命令.`,
 
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(args) < 1 {
 				cobra.CheckErr(fmt.Errorf("add needs a name for the command"))
 			}
-
 			wd, err := os.Getwd()
 			cobra.CheckErr(err)
-
 			commandName := validateCmdName(args[0])
 			command := &Command{
 				CmdName:   commandName,
@@ -56,9 +47,7 @@ Example: cobra add server -> resulting in a new cmd/server.go`,
 					Copyright:    copyrightLine(),
 				},
 			}
-
 			cobra.CheckErr(command.Create())
-
 			fmt.Printf("%s created at %s\n", command.CmdName, command.AbsolutePath)
 		},
 	}
@@ -73,7 +62,7 @@ func init() {
 // validateCmdName returns source without any dashes and underscore.
 // If there will be dash or underscore, next letter will be uppered.
 // It supports only ASCII (1-byte character) strings.
-// https://github.com/spf13/cobra/issues/269
+// https://github.com/yuansudong/cobra/issues/269
 func validateCmdName(source string) string {
 	i := 0
 	l := len(source)

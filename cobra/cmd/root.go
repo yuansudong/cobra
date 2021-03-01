@@ -17,7 +17,7 @@ import (
 	"fmt"
 
 	homedir "github.com/mitchellh/go-homedir"
-	"github.com/spf13/cobra"
+	"github.com/yuansudong/cobra"
 	"github.com/spf13/viper"
 )
 
@@ -43,10 +43,10 @@ func Execute() error {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.cobra.yaml)")
-	rootCmd.PersistentFlags().StringP("author", "a", "YOUR NAME", "author name for copyright attribution")
-	rootCmd.PersistentFlags().StringVarP(&userLicense, "license", "l", "", "name of license for the project")
-	rootCmd.PersistentFlags().Bool("viper", true, "use Viper for configuration")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "$HOME/.cobra.yaml", "配置文件")
+	rootCmd.PersistentFlags().StringP("author", "a", "你的名字", "作者的名字")
+	rootCmd.PersistentFlags().StringVarP(&userLicense, "license", "l", "", "许可协议")
+	rootCmd.PersistentFlags().Bool("viper", true, "对于配置,使用Viper")
 	cobra.CheckErr(viper.BindPFlag("author", rootCmd.PersistentFlags().Lookup("author")))
 	cobra.CheckErr(viper.BindPFlag("useViper", rootCmd.PersistentFlags().Lookup("viper")))
 	viper.SetDefault("author", "NAME HERE <EMAIL ADDRESS>")
