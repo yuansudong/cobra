@@ -767,11 +767,11 @@ func (c *Command) ArgsLenAtDash() int {
 
 func (c *Command) execute(a []string) (err error) {
 	if c == nil {
-		return fmt.Errorf("Called Execute() on a nil Command")
+		return fmt.Errorf("在一个nil命令上调用 Execute() ")
 	}
 
 	if len(c.Deprecated) > 0 {
-		c.Printf("Command %q is deprecated, %s\n", c.Name(), c.Deprecated)
+		c.Printf("Command %q 是弃用, %s\n", c.Name(), c.Deprecated)
 	}
 
 	// initialize help and version flag at the last point possible to allow for user
@@ -790,7 +790,7 @@ func (c *Command) execute(a []string) (err error) {
 	if err != nil {
 		// should be impossible to get here as we always declare a help
 		// flag in InitDefaultHelpFlag()
-		c.Println("\"help\" flag declared as non-bool. Please correct your code")
+		c.Println("\"help\" 选项非BOOL类型.请检查你的代码")
 		return err
 	}
 
@@ -802,7 +802,7 @@ func (c *Command) execute(a []string) (err error) {
 	if c.Version != "" {
 		versionVal, err := c.Flags().GetBool("version")
 		if err != nil {
-			c.Println("\"version\" flag declared as non-bool. Please correct your code")
+			c.Println("\"version\" 版本选项非BOOL值. 请检查你的代码")
 			return err
 		}
 		if versionVal {
@@ -944,8 +944,8 @@ func (c *Command) ExecuteC() (cmd *Command, err error) {
 			c = cmd
 		}
 		if !c.SilenceErrors {
-			c.PrintErrln("Error:", err.Error())
-			c.PrintErrf("Run '%v --help' for usage.\n", c.CommandPath())
+			c.PrintErrln("错误:", err.Error())
+			c.PrintErrf("运行 '%v --help' 查看使用方式.\n", c.CommandPath())
 		}
 		return c, err
 	}
@@ -973,7 +973,7 @@ func (c *Command) ExecuteC() (cmd *Command, err error) {
 		// If root command has SilenceErrors flagged,
 		// all subcommands should respect it
 		if !cmd.SilenceErrors && !c.SilenceErrors {
-			c.PrintErrln("Error:", err.Error())
+			c.PrintErrln("错误:", err.Error())
 		}
 
 		// If root command has SilenceUsage flagged,
@@ -1010,7 +1010,7 @@ func (c *Command) validateRequiredFlags() error {
 	})
 
 	if len(missingFlagNames) > 0 {
-		return fmt.Errorf(`required flag(s) "%s" not set`, strings.Join(missingFlagNames, `", "`))
+		return fmt.Errorf(`需要选项 "%s" not set`, strings.Join(missingFlagNames, `", "`))
 	}
 	return nil
 }
@@ -1021,9 +1021,9 @@ func (c *Command) validateRequiredFlags() error {
 func (c *Command) InitDefaultHelpFlag() {
 	c.mergePersistentFlags()
 	if c.Flags().Lookup("help") == nil {
-		usage := "help for "
+		usage := "帮助对于"
 		if c.Name() == "" {
-			usage += "this command"
+			usage += "这个命令"
 		} else {
 			usage += c.Name()
 		}
@@ -1068,8 +1068,8 @@ func (c *Command) InitDefaultHelpCmd() {
 		c.helpCommand = &Command{
 			Use:   "help [command]",
 			Short: "对于任何命令的帮助",
-			Long: `Help provides help for any command in the application.
-Simply type ` + c.Name() + ` help [path to command] for full details.`,
+			Long: `Help 提供对于这个应用程序的所有帮助描述.
+对于完整的描述,简单类型 ` + c.Name() + ` help`,
 			ValidArgsFunction: func(c *Command, args []string, toComplete string) ([]string, ShellCompDirective) {
 				var completions []string
 				cmd, _, e := c.Root().Find(args)
@@ -1092,7 +1092,7 @@ Simply type ` + c.Name() + ` help [path to command] for full details.`,
 			Run: func(c *Command, args []string) {
 				cmd, _, e := c.Root().Find(args)
 				if cmd == nil || e != nil {
-					c.Printf("Unknown help topic %#q\n", args)
+					c.Printf("未知的 help 主题 %#q\n", args)
 					CheckErr(c.Root().Usage())
 				} else {
 					cmd.InitDefaultHelpFlag() // make possible 'help' flag to be shown
