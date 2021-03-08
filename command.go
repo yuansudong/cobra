@@ -36,32 +36,23 @@ type FParseErrWhitelist flag.ParseErrorsWhitelist
 // you to define the usage and description as part of your command
 // definition to ensure usability.
 type Command struct {
-	// Use is the one-line usage message.
-	// Recommended syntax is as follow:
-	//   [ ] identifies an optional argument. Arguments that are not enclosed in brackets are required.
-	//   ... indicates that you can specify multiple values for the previous argument.
-	//   |   indicates mutually exclusive information. You can use the argument to the left of the separator or the
-	//       argument to the right of the separator. You cannot use both arguments in a single use of the command.
-	//   { } delimits a set of mutually exclusive arguments when one of the arguments is required. If the arguments are
-	//       optional, they are enclosed in brackets ([ ]).
-	// Example: add [-F file | -D dir]... [-f format] profile
-	Use string
+	// Use 命令的名称.
+	Use string `yaml:"Use"`
 
-	// Aliases is an array of aliases that can be used instead of the first word in Use.
-	Aliases []string
+	// Aliases 别名
+	Aliases []string `yaml:"Aliases"`
 
-	// SuggestFor is an array of command names for which this command will be suggested -
-	// similar to aliases but only suggests.
-	SuggestFor []string
+	// SuggestFor 建议
+	SuggestFor []string `yaml:"SuggestFor"`
 
-	// Short is the short description shown in the 'help' output.
-	Short string
+	// Short 在帮助页面显示的一个简短的描述
+	Short string `yaml:"Short"`
 
-	// Long is the long message shown in the 'help <this-command>' output.
-	Long string
+	// Long 在帮助主题下的一个长的描述
+	Long string `yaml:"Long"`
 
-	// Example is examples of how to use the command.
-	Example string
+	// Example 使用举例
+	Example string `yaml:"Example"`
 
 	// ValidArgs is list of all valid non-flag arguments that are accepted in bash completions
 	ValidArgs []string
@@ -221,6 +212,22 @@ type Command struct {
 	// SuggestionsMinimumDistance defines minimum levenshtein distance to display suggestions.
 	// Must be > 0.
 	SuggestionsMinimumDistance int
+}
+
+// FillLocalFlags 填充局部Flags
+func (c *Command) FillLocalFlags() {
+	// c.Flags().String(name string, value string, usage string)
+}
+
+// FillGlobalsFlags 填充全局的flags
+func (c *Command) FillGlobalsFlags(gs []GeneratorFlag) {
+	for _, item := range gs {
+		switch item.FlagType {
+		case FlagInt:
+			//strconv.ParseInt(s string, base int, bitSize int)
+			//c.PersistentFlags().Int(item.FlagName, value int, usage string)
+		}
+	}
 }
 
 // Context returns underlying command context. If command wasn't
