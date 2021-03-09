@@ -9,9 +9,13 @@ func (ft FlagType) String() string {
 
 const (
 	// FlagInt int类型
-	FlagInt   FlagType = "int"
-	FlagInt64 FlagType = "int64"
-	FlagInt32 FlagType = "int32"
+	FlagInt     FlagType = "int"
+	FlagInt64   FlagType = "int64"
+	FlagInt32   FlagType = "int32"
+	FlagInt8    FlagType = "int8"
+	FlagString  FlagType = "string"
+	FlagFloat32 FlagType = "float32"
+	FlagFloat64 FlagType = "float64"
 )
 
 // GeneratorFlag 生成的Flag对象

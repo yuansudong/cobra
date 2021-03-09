@@ -1,27 +1,30 @@
 Application: "example"
 Description: "这是一个Example.exe的程序"
 GeneratorDirectory: "." # 代码的生成目录
+PackageName: "cmdline"
 GlobalFlags:
-  - { Name: "F1", Type: "string" }
-  - { Name: "F2", Type: "bool" }
-  - { Name: "F3", Type: "int64" }
-  - { Name: "F4", Type: "float32" }
+  - { Name: "F1", Type: "string", Default: "F1_DEF", Usage: "F1=V1" }
+  - { Name: "F2", Type: "int32", Default: "32", Usage: "F2=V2" }
+  - { Name: "F3", Type: "int64", Default: "64", Usage: "F3=V3" }
+  - { Name: "F4", Type: "float32", Default: "32.00", Usage: "F4=V4" }
 SubCommand:
   - Use: "add"
     Long: "add的详细描述"
     Short: "add的简短描述"
-    Execute: { PkgPath: "github.com/yuansudong/cobra", Function: "Haha" }
+    PkgPath: "github.com/yuansudong/cobra"
+    Function: "Haha"
     Flags:
-      - { Name: "A1", Type: "string" }
-      - { Name: "A2", Type: "bool" }
-      - { Name: "A3", Type: "int64" }
-      - { Name: "A4", Type: "float32" }
+      - { Name: "A1", Type: "string", Default: "A1_DEF", Usage: "A1=V1" }
+      - { Name: "A2", Type: "int32", Default: "32", Usage: "A2=V2" }
+      - { Name: "A3", Type: "int64", Default: "64", Usage: "A3=V3" }
+      - { Name: "A4", Type: "float32", Default: "32.00", Usage: "A4=V4" }
   - Use: "dec"
     Long: "dec的详细描述"
     Short: "dec的简短描述"
-    Execute: { PkgPath: "github.com/yuansudong/cobra", Function: "Decription" }
+    PkgPath: "github.com/yuansudong/cobra"
+    Function: "Decription"
     Flags:
-      - { Name: "F1", Type: "string" }
-      - { Name: "F2", Type: "bool" }
-      - { Name: "F3", Type: "int64" }
-      - { Name: "F4", Type: "float32" }
+      - { Name: "F1", Type: "string", Default: "F1_DEF", Usage: "F1=V1" }
+      - { Name: "F2", Type: "int32", Default: "32", Usage: "F2=V2" }
+      - { Name: "F3", Type: "int64", Default: "64", Usage: "F3=V3" }
+      - { Name: "F4", Type: "float32", Default: "32.00", Usage: "F4=V4" }

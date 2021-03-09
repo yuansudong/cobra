@@ -214,22 +214,6 @@ type Command struct {
 	SuggestionsMinimumDistance int
 }
 
-// FillLocalFlags 填充局部Flags
-func (c *Command) FillLocalFlags() {
-	// c.Flags().String(name string, value string, usage string)
-}
-
-// FillGlobalsFlags 填充全局的flags
-func (c *Command) FillGlobalsFlags(gs []GeneratorFlag) {
-	for _, item := range gs {
-		switch item.FlagType {
-		case FlagInt:
-			//strconv.ParseInt(s string, base int, bitSize int)
-			//c.PersistentFlags().Int(item.FlagName, value int, usage string)
-		}
-	}
-}
-
 // Context returns underlying command context. If command wasn't
 // executed with ExecuteContext Context returns Background context.
 func (c *Command) Context() context.Context {
