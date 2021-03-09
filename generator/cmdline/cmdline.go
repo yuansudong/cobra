@@ -6,6 +6,12 @@ import (
 	"github.com/yuansudong/cobra"
 )
 
+var (
+	_Branch        string = "UNKNOWN"
+	_GitCommitID   string = "UNKNOWN"
+	_BuildDateTime string = "UNKNOWN"
+)
+
 // GlobalFlag 全局Flag
 type GlobalFlag struct {
 	F1 *string

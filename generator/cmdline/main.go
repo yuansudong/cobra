@@ -1,12 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"io"
-
-	"gopkg.in/yaml.v2"
 )
-
 
 type _Student struct {
 }
@@ -24,8 +20,6 @@ func main() {
 	// for _,item := _Root.Commands() {
 
 	// }
-	json.Marshal(v interface{})
-	yaml.Marshal(in interface{})
 	p := new(_Student)
 	V(p)
 	Execute()
