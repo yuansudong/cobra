@@ -1,15 +1,31 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/yuansudong/cobra"
 )
 
 var (
-	_Branch        string = "UNKNOWN"
-	_GitCommitID   string = "UNKNOWN"
-	_BuildDateTime string = "UNKNOWN"
+	// _Branch 分支名称
+	_GitBranch string = "UNKNOWN"
+	// _GitCommitID 最近一次的提交ID
+	_GitCommit string = "UNKNOWN"
+	// _GitAccount 提交人的名字
+	_GitAccount string = "UNKNOWN"
+	// _DateTime 编译的时间
+	_DateTime string = "UNKNOWN"
+	// _GoVersion GO的编译版本
+	_GoVersion string = "UNKNOWN"
+	// _OS 编译时的操作系统
+	_OS string = "UNKNOWN"
+	// _CPU类型
+	_Arch string = "UNKNOWN"
+	// _AppName app的名称
+	_AppName = "UNKNOWN"
+	// _AppVersion 版本
+	_AppVersion string = "UNKNOWN"
 )
 
 // GlobalFlag 全局Flag
@@ -81,12 +97,32 @@ func _InitRoot() *cobra.Command {
 
 	mRootCommand.AddCommand(_InitSubdec(mGlobalsFlags))
 
+	mRootCommand.AddCommand(_InitVersion())
 	return mRootCommand
 }
 
 // Execute 执行入口
 func Execute() error {
 	return _Root.Execute()
+}
+
+func _InitVersion() *cobra.Command {
+	mCommand := new(cobra.Command)
+	mCommand.Use = "version"
+	mCommand.Long = "查看编译以及版本信息"
+	mCommand.Short = "查看编译以及版本信息"
+	mCommand.Run = func(cmd *cobra.Command, args []string) {
+		fmt.Println("App Name     :   ", _AppName)
+		fmt.Println("App Version  :   ", _AppVersion)
+		fmt.Println("Git Branch   :   ", _GitBranch)
+		fmt.Println("Git Commit   :   ", _GitCommit)
+		fmt.Println("Git Account  :   ", _GitAccount)
+		fmt.Println("Go Version   :   ", _GoVersion)
+		fmt.Println("Build System :   ", _OS)
+		fmt.Println("Build Time   :   ", _DateTime)
+		fmt.Println("Build Arch   :   ", _Arch)
+	}
+	return mCommand
 }
 
 func _InitSubadd(mGlobal *GlobalFlag) *cobra.Command {
