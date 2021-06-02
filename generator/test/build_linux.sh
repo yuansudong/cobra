@@ -1,3 +1,4 @@
+
 #!/bin/bash
 os=$(go env GOOS)
 arch=$(go env GOARCH)

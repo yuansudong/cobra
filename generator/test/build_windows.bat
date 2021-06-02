@@ -1,3 +1,4 @@
+
 @echo off
 for /F %%i in ('go env GOOS') do ( set os=%%i)
 for /F %%i in ('go env GOARCH') do ( set arch=%%i)
